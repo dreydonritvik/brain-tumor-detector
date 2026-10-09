@@ -55,8 +55,12 @@ The dataset is included in the repo, so you can run `detector.ipynb` from top to
 
 ## Dataset
 
-<!-- TODO: add the dataset source link -->
-Dataset source: _link to be added_
+The dataset combines two public Kaggle datasets. The sources were identified afterward from file names and per-class counts, which match both datasets exactly (7,023 + 3,264 = 10,287 images):
+
+- [Brain Tumor MRI Dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) by Masoud Nickparvar: files named `Tr-*` and `Te-*`
+- [Brain Tumor Classification (MRI)](https://www.kaggle.com/datasets/sartajbhuvaji/brain-tumor-classification-mri) by Sartaj Bhuvaji: files named `gg (N)`, `m (N)`, `p (N)`, and `image(N)`
+
+The Nickparvar dataset already includes images from the Sartaj dataset, so the combined set contains many exact duplicates. 2,817 of the 10,287 files are byte-identical copies of another file.
 
 The dataset is included under `dataset/` and stored with Git LFS. The notebook expects this layout, with one folder per class:
 
@@ -103,6 +107,7 @@ After 15 epochs, the training log reports:
 
 Keep these limitations in mind when reading these numbers:
 
+- **Train/test leakage.** 364 of the 1,705 `Testing/` images (21%) also appear byte-for-byte in `Training/`, always under the same class. The model has already seen these images during training, which inflates the validation accuracy. Removing the duplicates from `Testing/` would give a more honest number.
 - **No separate test set.** The `Testing/` folder served as the validation set during training, so 93.14% is not a measurement on fully unseen data.
 - **Overfitting.** Validation loss was lowest at epoch 3 (0.82) and kept rising afterward, while training loss went toward zero. Early stopping or data augmentation would probably help.
 
