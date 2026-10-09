@@ -11,11 +11,11 @@ A convolutional neural network that classifies brain MRI slices into four classe
 | `detector.ipynb` | Data loading, model definition, training, evaluation, and inference |
 | `brain_tumor_expert_model.keras` | Trained model (~134 MB, stored with Git LFS) |
 | `images/` | Sample images for running inference |
-| `dataset/` | Training and test data. Not included in the repo; see [Dataset](#dataset) |
+| `dataset/` | Training and test images (~265 MB, stored with Git LFS); see [Dataset](#dataset) |
 
 ## Getting started
 
-The model file is stored with [Git LFS](https://git-lfs.com/). Install Git LFS before cloning, or the `.keras` file will be a small pointer file instead of the model:
+The model and the dataset are stored with [Git LFS](https://git-lfs.com/). Install Git LFS before cloning, or those files will be small pointer files instead of the real content:
 
 ```bash
 git lfs install
@@ -51,14 +51,14 @@ print(CLASSES[np.argmax(preds)], f'{preds.max():.2%}')
 
 ### Retraining
 
-Download the dataset, place it under `dataset/` as described below, and run `detector.ipynb` from top to bottom. On the original run, each of the 15 epochs took about 80 seconds.
+The dataset is included in the repo, so you can run `detector.ipynb` from top to bottom. On the original run, each of the 15 epochs took about 80 seconds.
 
 ## Dataset
 
 <!-- TODO: add the dataset source link -->
 Dataset source: _link to be added_
 
-The notebook expects this layout, with one folder per class:
+The dataset is included under `dataset/` and stored with Git LFS. The notebook expects this layout, with one folder per class:
 
 ```
 dataset/
